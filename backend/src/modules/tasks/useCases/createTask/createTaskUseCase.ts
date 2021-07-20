@@ -22,6 +22,10 @@ class CreateTaskUseCase {
   ) {}
 
   async execute({ description, user_id }: IRequest): Promise<Tasks> {
+    if (!user_id) {
+      throw new CreateTaskError.UserIdMustBeProvided();
+    }
+
     const user = await this.usersRepository.findByID(user_id);
     if (!user) {
       throw new CreateTaskError.UserNotFound();
