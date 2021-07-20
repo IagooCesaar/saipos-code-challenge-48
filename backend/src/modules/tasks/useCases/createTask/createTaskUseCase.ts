@@ -27,21 +27,24 @@ class CreateTaskUseCase {
       throw new CreateTaskError.UserIdMustBeProvided();
     }
 
+    let validUserId = "";
     if (user_id) {
       const user = await this.usersRepository.findByID(user_id);
       if (!user) {
         throw new CreateTaskError.UserNotFound();
       }
+      validUserId = user.id;
     } else if (email) {
       const user = await this.usersRepository.findByEmail(email);
       if (!user) {
         throw new CreateTaskError.UserNotFound();
       }
+      validUserId = user.id;
     }
 
     const task = await this.tasksRepository.create({
       description,
-      user_id,
+      user_id: validUserId,
     });
     return task;
   }
