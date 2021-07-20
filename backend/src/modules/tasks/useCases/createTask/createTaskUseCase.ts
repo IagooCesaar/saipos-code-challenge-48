@@ -7,7 +7,8 @@ import { IUsersRepository } from "@modules/users/repositories/IUsersRepository";
 import { CreateTaskError } from "./createTaskError";
 
 interface IRequest {
-  user_id: string;
+  user_id?: string;
+  email?: string;
   description: string;
 }
 
@@ -21,14 +22,21 @@ class CreateTaskUseCase {
     private usersRepository: IUsersRepository
   ) {}
 
-  async execute({ description, user_id }: IRequest): Promise<Tasks> {
-    if (!user_id) {
+  async execute({ description, user_id, email }: IRequest): Promise<Tasks> {
+    if (!user_id && !email) {
       throw new CreateTaskError.UserIdMustBeProvided();
     }
 
-    const user = await this.usersRepository.findByID(user_id);
-    if (!user) {
-      throw new CreateTaskError.UserNotFound();
+    if (user_id) {
+      const user = await this.usersRepository.findByID(user_id);
+      if (!user) {
+        throw new CreateTaskError.UserNotFound();
+      }
+    } else if (email) {
+      const user = await this.usersRepository.findByEmail(email);
+      if (!user) {
+        throw new CreateTaskError.UserNotFound();
+      }
     }
 
     const task = await this.tasksRepository.create({
