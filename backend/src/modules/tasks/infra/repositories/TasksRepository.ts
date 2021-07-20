@@ -22,7 +22,10 @@ class TasksRepository implements ITasksRepository {
   }
 
   async getTasks(done: boolean): Promise<Tasks[]> {
-    const tasks = await this.repository.find({ done });
+    const tasks = await this.repository.find({
+      where: { done },
+      relations: ["user"],
+    });
     return tasks;
   }
 }
