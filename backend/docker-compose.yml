@@ -10,7 +10,7 @@ services:
     environment: 
       - POSTGRES_USER=docker
       - POSTGRES_PASSWORD=secret
-      - POSTGRES_DB=prod_database
+      - POSTGRES_DB=saipos_todo
     volumes:
       - pgdata:/data/postgres
     networks:
