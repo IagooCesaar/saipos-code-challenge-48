@@ -7,7 +7,7 @@ export namespace CreateUserError {
     constructor(didYouMean: string) {
       super(
         "CreateUserError.EmailIncorrect",
-        `O e-mail fornecido esta incorreto. Você quis dizer "${didYouMean}"`
+        `O e-mail fornecido esta incorreto. Você quis dizer "${didYouMean}"?`
       );
     }
   }

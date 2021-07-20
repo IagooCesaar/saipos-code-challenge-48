@@ -17,7 +17,6 @@ interface IResponse {
 }
 
 interface IMailboxLayerResponse {
-  catch_all: boolean;
   did_you_mean?: string;
 }
 
@@ -34,9 +33,8 @@ class CreateUserUseCase {
         email,
       },
     });
-
     const mailboxLayerResponse = response.data as IMailboxLayerResponse;
-    if (!mailboxLayerResponse.catch_all) {
+    if (mailboxLayerResponse.did_you_mean) {
       throw new CreateUserError.EmailIncorrect(
         mailboxLayerResponse.did_you_mean
       );
