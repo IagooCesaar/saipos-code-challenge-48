@@ -16,11 +16,17 @@ class TasksRepository implements ITasksRepository {
     return task;
   }
 
-  async create({ description, user_id }: ICreateTaskDTO): Promise<Tasks> {
+  async create({
+    description,
+    user_id,
+    done,
+    id,
+  }: ICreateTaskDTO): Promise<Tasks> {
     const task = this.repository.create({
       description,
       user_id,
-      done: false,
+      done: done || false,
+      id,
     });
     await this.repository.save(task);
     return task;

@@ -32,9 +32,6 @@ class TaskHistory {
   task: Users;
 
   @Column()
-  description: string;
-
-  @Column()
   done: boolean;
 
   @CreateDateColumn()
