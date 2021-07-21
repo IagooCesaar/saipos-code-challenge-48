@@ -1,4 +1,5 @@
 import { ITaskHistoryCountDTO } from "../dtos/ITaskHistoryCountDTO";
+import { TaskHistory } from "../infra/entities/TaskHistory";
 
 interface ITaskHistoryRepository {
   registryHistory(
@@ -7,6 +8,7 @@ interface ITaskHistoryRepository {
     done: boolean
   ): Promise<void>;
   historyCount(data: ITaskHistoryCountDTO): Promise<number>;
+  getTaskHistory(task_id: string): Promise<TaskHistory[]>;
 }
 
 export { ITaskHistoryRepository };

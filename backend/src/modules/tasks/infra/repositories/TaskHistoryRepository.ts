@@ -11,6 +11,14 @@ class TaskHistoryRepository implements ITaskHistoryRepository {
     this.repository = getRepository(TaskHistory);
   }
 
+  async getTaskHistory(task_id: string): Promise<TaskHistory[]> {
+    const history = await this.repository.find({
+      where: { task_id },
+      relations: ["user"],
+    });
+    return history;
+  }
+
   async registryHistory(
     task_id: string,
     user_id: string,

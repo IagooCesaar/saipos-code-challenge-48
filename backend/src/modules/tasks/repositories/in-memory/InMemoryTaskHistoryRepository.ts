@@ -29,6 +29,11 @@ class InMemoryTaskHistoryRepository implements ITaskHistoryRepository {
     );
     return history.length;
   }
+
+  async getTaskHistory(task_id: string): Promise<TaskHistory[]> {
+    const history = this.taskHistory.filter((task) => task.task_id === task_id);
+    return history;
+  }
 }
 
 export { InMemoryTaskHistoryRepository };
