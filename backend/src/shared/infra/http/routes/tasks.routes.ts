@@ -2,7 +2,7 @@ import { Router } from "express";
 
 import { CreateTaskController } from "@modules/tasks/useCases/createTask/createTaskController";
 import { GetTasksController } from "@modules/tasks/useCases/getTasks/getTasksController";
-import { MarkTaskAsDoneController } from "@modules/tasks/useCases/markTaskAsDone/maskTaskAsDoneController";
+import { MarkTaskAsDoneController } from "@modules/tasks/useCases/markTaskAsDone/markTaskAsDoneController";
 
 import { ensureHeadersWithUserId } from "../middlewares/ensureHeadersWithUserId";
 
