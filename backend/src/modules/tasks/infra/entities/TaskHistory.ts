@@ -10,8 +10,10 @@ import { v4 as uuidV4 } from "uuid";
 
 import { Users } from "@modules/users/infra/typeorm/entities/Users";
 
-@Entity("Tasks")
-class Tasks {
+import { Tasks } from "./Tasks";
+
+@Entity("TaskHistory")
+class TaskHistory {
   @PrimaryColumn()
   id: string;
 
@@ -23,13 +25,20 @@ class Tasks {
   user: Users;
 
   @Column()
+  task_id: string;
+
+  @ManyToOne(() => Tasks, (task) => task.id)
+  @JoinColumn({ name: "task_id" })
+  task: Users;
+
+  @Column()
   description: string;
 
   @Column()
   done: boolean;
 
   @CreateDateColumn()
-  created_at: Date;
+  occurrence: Date;
 
   constructor() {
     if (!this.id) {
@@ -38,4 +47,4 @@ class Tasks {
   }
 }
 
-export { Tasks };
+export { TaskHistory };
