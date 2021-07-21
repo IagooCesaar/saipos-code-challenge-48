@@ -13,6 +13,11 @@ class InMemoryTasksRepository implements ITasksRepository {
     return task;
   }
 
+  async findById(id: string): Promise<Tasks> {
+    const task = this.tasks.find((task) => task.id === id);
+    return task;
+  }
+
   async getTasks(done: boolean): Promise<Tasks[]> {
     const filteredTasks = this.tasks.filter((task) => task.done === done);
     return filteredTasks;
